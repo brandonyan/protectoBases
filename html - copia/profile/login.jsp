@@ -165,7 +165,7 @@
 					<c:when test="${row.kount > 0}">
 						
 						<c:set scope="session" var="em" value="${param.password}"/>
-						<c:redirect url="client.jsp"/>
+						<c:redirect url="gestionCotizar.jsp"/>
 					</c:when>
 					<c:otherwise>
 						<c:set scope="session" value="Usuario y/o contaseña invalidos" var="em"/>
