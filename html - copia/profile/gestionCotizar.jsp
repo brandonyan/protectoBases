@@ -139,39 +139,30 @@
 
         
         <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbar_default">
-    <ul class="navbar-nav " data-hover="dropdown" data-animations="zoomIn zoomIn zoomIn zoomIn">
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <i class="ion-person"></i> Profile
-            </a>
-
-            <ul class="dropdown-menu">
-                <li class="dropdown">
-                    <a class="dropdown-item" href="../../html/profile/profile-user-about-1.html">Profile: Style 1</a>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-item" href="../../html/profile/profile-user-about-2.html">Profile: Style 2</a>
-                </li>
-            </ul>
-        </li>
+    <ul class="navbar-nav " data-animations="zoomIn zoomIn zoomIn zoomIn">
         <li class="nav-item">
-            <a href="../../html/profile/profile-user-resume.html" class="nav-link">
-               <i class="ion-document"></i> Resume
+            <a href="#" class="nav-link" aria-haspopup="true" aria-expanded="false">
+               <i class="ion-person"></i> Clientes
             </a>
         </li>
         <li class="nav-item">
-            <a href="../../html/profile/profile-user-connections.html" class="nav-link">
-               <i class="ion-person-stalker"></i> Clientes
+            <a href="../../AcuedoPago.jsp" class="nav-link">
+               <i class="ion-document"></i> Acuerdo Pago
             </a>
         </li>
         <li class="nav-item">
-            <a href="../../html/profile/profile-user-orders.html" class="nav-link">
-               <i class="ion-bag"></i> Orders
+            <a href="../../EstudioCredito.jsp" class="nav-link">
+               <i class="ion-person-stalker"></i> Estudio Credito
             </a>
         </li>
         <li class="nav-item">
-            <a href="../../html/profile/profile-user-cards.html" class="nav-link">
-               <i class="ion-card"></i> Cards
+            <a href="../../AbonarPago.jsp" class="nav-link">
+               <i class="ion-bag"></i> Abonar Pago
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="../../SepararAuto.jsp" class="nav-link">
+               <i class="ion-card"></i> Separar Auto
             </a>
         </li>
 
@@ -324,6 +315,11 @@
 								</tbody>
 							</table>
 						</c:if>
+						<div class="card-title">
+                            <h3 class="heading heading-6 strong-500">
+                                Autos
+                            </h3>
+                        </div>
 						<form name="auto" action="" method="post" class="form-default" role="form">
                             <select name="id_auto" class="form-control selectpicker">
                                             <option>Ninguno</option>
@@ -359,128 +355,7 @@
 						<form name="cot" method="POST" action="">     
 							<input class="btn btn-styled btn-base-1 btn-circle" type="submit" name="Rcot" value="Realizar cotizacion"/>
 						</form>						
-                    </div>
-
-
-        
-
-        <form name="cli" action="" method="post">
-            <select name="id_cliente">
-                <c:forEach var="row" items="${result.rows}">
-                    <option value="${row.cedula}">${row.nombre_cliente} ${row.apellido_cliente}</option>
-                </c:forEach>
-            </select>
-            <input type="submit" name="consultar" class="btn btn-styled btn-base-1 btn-circle" value="Consultar"/>
-        </form>
-        <c:if test="${param.consultar != null}">
-            <sql:query var="result2" dataSource="jdbc/p">
-                select *  from Cliente where cedula = ? 
-                <sql:param value="${param.id_cliente}"/>
-
-
-
-            </sql:query>
-                <c:set scope="session" var="client" value="${param.id_cliente}"/>
-
-            <sql:query var="result3" dataSource="jdbc/p">
-                select *  from Contacto where cedula = ? 
-                <sql:param value="${param.id_cliente}"/>
-
-
-
-            </sql:query>
-
-
-            <table border="1">
-
-                <tbody>
-                    <tr>
-                        <td><table border="1">
-
-                                <tr>
-                                    <c:forEach var="columnName" items="${result2.columnNames}">
-                                        <th><c:out value="${columnName}"/></th>
-                                        </c:forEach>
-                                </tr>
-
-                                <c:forEach var="row" items="${result2.rowsByIndex}">
-                                    <tr>
-                                        <c:forEach var="column" items="${row}">
-                                            <td><c:out value="${column}"/></td>
-                                        </c:forEach>
-                                    </tr>
-                                </c:forEach>
-                            </table></td>
-                        <td>
-                            <table border="1">
-
-                                <tbody>
-                                    <tr>
-                                        <td<b>CONTACTO</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td><c:forEach var="con" items="${result3.rows}">
-                                                ${con.atributo_contacto}
-
-                                            </c:forEach>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </c:if>
-        <form name="auto" action="" method="post">
-            <select name="id_auto">
-                <c:forEach var="row" items="${resultauto.rows}">
-
-                    <option value="${row.id_auto}">${row.marca_auto} ${row.nombre_auto}</option>
-                   <c:set scope="session" var="idau" value="${row.id_auto}"/>
-
-
-                </c:forEach>
-
-            </select>
-            <input type="submit" name="cotizar" value="Cotizar"/>
-        </form>
-        <c:if  test="${param.cotizar != null}" >
-            <sql:query var="resultprecio" dataSource="jdbc/p">
-                select precio_auto  from Auto where id_auto = ? 
-            <sql:param value="${param.id_auto}"/>
-
-            </sql:query>
-
-            <table border="1">
-
-                <tbody>
-                    <tr>
-                        <td<b>PRECIO</b></td>
-                    </tr>
-                    <tr>
-                        <td><c:forEach var="pre" items="${resultprecio.rows}">
-                                <c:set scope="session" var="precioA" value="${pre.precio_auto}"/>
-                                ${pre.precio_auto}
-
-                            </c:forEach>
-                            
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-
-
-        </c:if>
-               
-                <form name="cot" method="POST" action="">
-            
-            
-            
-            
-            <input type="submit" name="Rcot" value="Realizar cotizacion"/>
-        </form>
+                    </div>             
 <jsp:useBean id="random" class="java.util.Random" scope="application"/>
 
         <c:if test="${param.Rcot != null}">
@@ -498,15 +373,6 @@
 
 
         </c:if>
-        <form>
-<input type="button" value="Acuerdo  Pago" onClick="newPage('AcuedoPago.jsp')">
-<input type="button" value="Separar Auto" onClick="newPage('SepararAuto.jsp')">
-<input type="button" value="Estudio Credito" onClick="newPage('EstudioCredito.jsp')">
-<input type="button" value="Abonar Pago" onClick="newPage('AbonarPago.jsp')">
-
-
-
-</form>
         
     </body>
 </html>
