@@ -141,27 +141,27 @@
         <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbar_default">
     <ul class="navbar-nav " data-animations="zoomIn zoomIn zoomIn zoomIn">
         <li class="nav-item">
-            <a href="#" class="nav-link" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link" aria-haspopup="true" aria-expanded="false">
                <i class="ion-person"></i> Clientes
             </a>
         </li>
         <li class="nav-item">
-            <a href="../../AcuedoPago.jsp" class="nav-link">
+            <a href="../../AcuedoPago.jsp" target="_blank" class="nav-link">
                <i class="ion-document"></i> Acuerdo Pago
             </a>
         </li>
         <li class="nav-item">
-            <a href="../../EstudioCredito.jsp" class="nav-link">
+            <a href="../../EstudioCredito.jsp" target="_blank" class="nav-link">
                <i class="ion-person-stalker"></i> Estudio Credito
             </a>
         </li>
         <li class="nav-item">
-            <a href="../../AbonarPago.jsp" class="nav-link">
+            <a href="../../AbonarPago.jsp" target="_blank" class="nav-link">
                <i class="ion-bag"></i> Abonar Pago
             </a>
         </li>
         <li class="nav-item">
-            <a href="../../SepararAuto.jsp" class="nav-link">
+            <a href="../../SepararAuto.jsp" target="_blank" class="nav-link">
                <i class="ion-card"></i> Separar Auto
             </a>
         </li>
@@ -373,6 +373,14 @@
 
 
         </c:if>
-        
+        <form>
+<input type="button" value="Acuerdo  Pago" onClick="newPage('../../AcuedoPago.jsp')">
+<input type="button" value="Separar Auto" onClick="newPage('../../SepararAuto.jsp')">
+<input type="button" value="Estudio Credito" onClick="newPage('../../EstudioCredito.jsp')">
+<input type="button" value="Abonar Pago" onClick="newPage('../../AbonarPago.jsp')">
+
+
+
+</form>
     </body>
 </html>
